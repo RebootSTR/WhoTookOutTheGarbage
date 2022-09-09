@@ -14,7 +14,7 @@ class RoomController @Autowired constructor(
 ) {
 
     @PostMapping(value = ["/lol"])
-    fun write(@RequestBody string: String): ResponseEntity<String?> {
+    fun write(string: String): ResponseEntity<String?> {
         roomService.create(string)
         return ResponseEntity("saved", HttpStatus.OK)
     }
