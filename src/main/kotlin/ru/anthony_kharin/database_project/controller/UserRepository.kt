@@ -6,16 +6,16 @@ import org.springframework.stereotype.Repository
 import java.sql.Types
 
 @Repository
-class RoomRepository @Autowired constructor(
+class UserRepository @Autowired constructor(
     private val jdbcOperations: JdbcOperations
 ) {
 
-    private val insertQuery = "INSERT INTO test (id) VALUES (?)"
-    private val searchQuery = "SELECT id FROM test"
+    private val insertQuery = "INSERT INTO users (id, firstname, secondname, score) VALUES (?, ?, ?, ?) RETURNING id"
+    private val searchQuery = "SELECT firstname FROM users"
 
-    fun save(str: String) {
-        val params: Array<Any?> = arrayOf(str)
-        val types = intArrayOf(Types.VARCHAR)
+    fun save(userEntity: UserEntity) {
+        val params = arrayOf(userEntity.id, userEntity.firstname, userEntity.secondname, userEntity.score)
+        val types = intArrayOf(Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.INTEGER)
         jdbcOperations.queryForRowSet(insertQuery, params, types)
     }
 
