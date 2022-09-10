@@ -11,10 +11,10 @@ data class UserEntity(
     @Id
     @Column(name = "id")
     val id: Int = 0,
-    @Column(name = "firstname")
-    val firstname: String? = null,
-    @Column(name = "secondname")
-    val secondname: String? = null,
+    @Column(name = "first_name")
+    val firstName: String? = null,
+    @Column(name = "last_name")
+    val lastName: String? = null,
     @Column(name = "score")
     val score: Int? = null
 )
