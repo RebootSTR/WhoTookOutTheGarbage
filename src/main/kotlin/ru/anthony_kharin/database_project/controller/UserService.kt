@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService @Autowired constructor(
-    private val user2Repository: User2Repository
+    private val userRepository: UserRepository
 ) {
-    fun create(userEntity: UserEntity) = user2Repository.save(userEntity)
+    fun create(userEntity: UserEntity) = userRepository.save(userEntity)
 
-    fun readAll(): List<String?> = user2Repository.findAll().map { it.firstname }
+    fun readAll(): List<UserEntity> = userRepository.findAll().toList()
 }
