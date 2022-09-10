@@ -13,7 +13,7 @@ class TaskController @Autowired constructor(
     @GetMapping(value = ["/tasks"])
     fun read(): ResponseEntity<String> {
         return try {
-            ResponseEntity(taskService.readAll().toString(), HttpStatus.OK)
+            ResponseEntity("", HttpStatus.OK)
         } catch (t: Throwable) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }

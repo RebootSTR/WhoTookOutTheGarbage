@@ -1,18 +1,19 @@
 package ru.anthony_kharin.database_project.task
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "task")
 data class TaskEntity(
     @Id
-    @Column(name = "id")
-    val id: Int = 0,
-    @Column(name = "cost")
-    val cost: String = "",
-    @Column(name = "text")
-    val text: String = ""
+    @SequenceGenerator(name = "taskIdSeq", sequenceName = "task_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskIdSeq")
+    @Column(name = "id", nullable = false)
+    val id: String = "",
+    @Column(name = "title", nullable = false)
+    val title: String = "",
+    @Column(name = "description", nullable = false)
+    val description: String = "",
+    @Column(name = "cost", nullable = false)
+    val cost: Int = 0
 )

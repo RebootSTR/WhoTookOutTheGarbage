@@ -7,7 +7,5 @@ import org.springframework.stereotype.Service
 class TaskService @Autowired constructor(
     private val taskRepository: TaskRepository
 ) {
-    fun create(userEntity: TaskEntity) = taskRepository.save(userEntity)
 
-    fun readAll(): List<TaskEntity?> = taskRepository.findAll().toList()
 }
