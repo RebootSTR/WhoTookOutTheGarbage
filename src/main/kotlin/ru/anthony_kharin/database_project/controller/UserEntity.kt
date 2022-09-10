@@ -10,11 +10,11 @@ import javax.persistence.Table
 data class UserEntity(
     @Id
     @Column(name = "id")
-    val id: Int = 0,
+    val id: String = "",
     @Column(name = "first_name")
-    val firstName: String? = null,
+    val firstName: String = "",
     @Column(name = "last_name")
-    val lastName: String? = null,
+    val lastName: String = "",
     @Column(name = "score")
-    val score: Int? = null
+    val score: Int = 0
 )
