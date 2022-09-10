@@ -1,4 +1,4 @@
-package ru.anthony_kharin.database_project.controller
+package ru.anthony_kharin.database_project.user
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -22,9 +22,18 @@ class UserController @Autowired constructor(
     }
 
     @GetMapping(value = ["/users"])
-    fun read(): ResponseEntity<String> {
+    fun readAll(): ResponseEntity<String> {
         return try {
             ResponseEntity(userService.readAll().toString(), HttpStatus.OK)
+        } catch (t: Throwable) {
+            ResponseEntity(HttpStatus.BAD_REQUEST)
+        }
+    }
+
+    @GetMapping(value = ["/users"])
+    fun read(@RequestParam uid: String): ResponseEntity<UserEntity> {
+        return try {
+            ResponseEntity(userService.read(uid), HttpStatus.OK)
         } catch (t: Throwable) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }

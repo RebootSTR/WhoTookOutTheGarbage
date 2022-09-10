@@ -1,4 +1,4 @@
-package ru.anthony_kharin.database_project.controller
+package ru.anthony_kharin.database_project.user
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -9,5 +9,7 @@ class UserService @Autowired constructor(
 ) {
     fun create(userEntity: UserEntity) = userRepository.save(userEntity)
 
-    fun readAll(): List<String?> = userRepository.findAll().toList().map { it.firstName }
+    fun read(uid: String): UserEntity? = userRepository.findById(uid).get()
+
+    fun readAll(): List<UserEntity?> = userRepository.findAll().toList()
 }

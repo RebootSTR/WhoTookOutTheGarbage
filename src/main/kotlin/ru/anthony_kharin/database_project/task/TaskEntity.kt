@@ -1,4 +1,4 @@
-package ru.anthony_kharin.database_project.controller
+package ru.anthony_kharin.database_project.task
 
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -7,7 +7,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "users")
-data class UserEntity(
+data class TaskEntity(
     @Id
     @Column(name = "id")
     val id: String = "",
