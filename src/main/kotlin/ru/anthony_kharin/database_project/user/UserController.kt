@@ -4,25 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import ru.anthony_kharin.database_project.user.dto.AddUserDto
 
 @RestController
+@RequestMapping("/users")
 class UserController @Autowired constructor(
     private val userService: UserService
 ) {
 
-    @PostMapping(value = ["/register"])
+    @PostMapping(value = ["/new"])
     @ResponseBody
-    fun write(userEntity: UserEntity): ResponseEntity<String> {
-        try {
-            userService.create(userEntity)
+    fun add(dto: AddUserDto): ResponseEntity<UserEntity> {
+        return try {
+            val user = userService.create(dto)
+            ResponseEntity(user, HttpStatus.OK)
         } catch (t: Throwable) {
-            return ResponseEntity(t.message, HttpStatus.BAD_REQUEST)
+            return ResponseEntity(HttpStatus.BAD_REQUEST)
         }
-        return ResponseEntity("Completed", HttpStatus.OK)
     }
 
-    @GetMapping(value = ["/users"])
-    fun readAll(): ResponseEntity<List<UserEntity>> {
+    @GetMapping(value = ["/getAll"])
+    fun getAll(): ResponseEntity<List<UserEntity>> {
         return try {
             ResponseEntity(userService.readAll(), HttpStatus.OK)
         } catch (t: Throwable) {
@@ -30,13 +32,12 @@ class UserController @Autowired constructor(
         }
     }
 
-    @GetMapping(value = ["/user"])
-    fun read(@RequestParam uid: String): ResponseEntity<UserEntity> {
+    @GetMapping(value = ["/getById"])
+    fun getById(@RequestParam uid: String): ResponseEntity<UserEntity> {
         return try {
             ResponseEntity(userService.read(uid), HttpStatus.OK)
         } catch (t: Throwable) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }
     }
-
 }
