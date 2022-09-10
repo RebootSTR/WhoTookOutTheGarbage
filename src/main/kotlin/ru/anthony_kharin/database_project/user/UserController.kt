@@ -22,15 +22,15 @@ class UserController @Autowired constructor(
     }
 
     @GetMapping(value = ["/users"])
-    fun readAll(): ResponseEntity<String> {
+    fun readAll(): ResponseEntity<List<UserEntity>> {
         return try {
-            ResponseEntity(userService.readAll().toString(), HttpStatus.OK)
+            ResponseEntity(userService.readAll(), HttpStatus.OK)
         } catch (t: Throwable) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }
     }
 
-    @GetMapping(value = ["/users"])
+    @GetMapping(value = ["/user"])
     fun read(@RequestParam uid: String): ResponseEntity<UserEntity> {
         return try {
             ResponseEntity(userService.read(uid), HttpStatus.OK)

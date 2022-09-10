@@ -7,24 +7,13 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class TaskController @Autowired constructor(
-    private val userService: TaskService
+    private val taskService: TaskService
 ) {
 
-    @PostMapping(value = ["/register"])
-    @ResponseBody
-    fun write(userEntity: TaskEntity): ResponseEntity<String> {
-        try {
-            userService.create(userEntity)
-        } catch (t: Throwable) {
-            return ResponseEntity(t.message, HttpStatus.BAD_REQUEST)
-        }
-        return ResponseEntity("Completed", HttpStatus.OK)
-    }
-
-    @GetMapping(value = ["/users"])
+    @GetMapping(value = ["/tasks"])
     fun read(): ResponseEntity<String> {
         return try {
-            ResponseEntity(userService.readAll().toString(), HttpStatus.OK)
+            ResponseEntity(taskService.readAll().toString(), HttpStatus.OK)
         } catch (t: Throwable) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }

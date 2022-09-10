@@ -9,5 +9,5 @@ class TaskService @Autowired constructor(
 ) {
     fun create(userEntity: TaskEntity) = taskRepository.save(userEntity)
 
-    fun readAll(): List<String?> = taskRepository.findAll().toList().map { it.firstName }
+    fun readAll(): List<TaskEntity?> = taskRepository.findAll().toList()
 }

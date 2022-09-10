@@ -6,15 +6,13 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "users")
+@Table(name = "task")
 data class TaskEntity(
     @Id
     @Column(name = "id")
-    val id: String = "",
-    @Column(name = "first_name")
-    val firstName: String = "",
-    @Column(name = "last_name")
-    val lastName: String = "",
-    @Column(name = "score")
-    val score: Int = 0
+    val id: Int = 0,
+    @Column(name = "cost")
+    val cost: String = "",
+    @Column(name = "text")
+    val text: String = ""
 )
