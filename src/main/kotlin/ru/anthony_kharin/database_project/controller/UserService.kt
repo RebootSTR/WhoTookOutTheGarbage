@@ -9,5 +9,5 @@ class UserService @Autowired constructor(
 ) {
     fun create(userEntity: UserEntity) = userRepository.save(userEntity)
 
-    fun readAll(): List<UserEntity> = userRepository.findAll().toList()
+    fun readAll():  List<String?> = userRepository.read()
 }
