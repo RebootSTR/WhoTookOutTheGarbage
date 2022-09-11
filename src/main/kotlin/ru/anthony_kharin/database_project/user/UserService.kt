@@ -2,7 +2,6 @@ package ru.anthony_kharin.database_project.user
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import ru.anthony_kharin.database_project.task.TaskEntity
 import ru.anthony_kharin.database_project.task.TaskRepository
 import ru.anthony_kharin.database_project.taskStatuses.Statuses
 import ru.anthony_kharin.database_project.user.dto.TaskAndUserDTO
@@ -59,9 +58,8 @@ class UserService @Autowired constructor(
         return userTasksRepository.save(newUserTask)
     }
 
-    fun getAllUserTasks(userId: String): List<TaskEntity> {
-        val user = userRepository.findById(userId).get()
+    fun getAllUserTasks(userId: String): List<UserTasksEntity> {
 
-        return user.tasks
+        return userTasksRepository.findAllByUserId(userId)
     }
 }

@@ -44,7 +44,7 @@ class UserController @Autowired constructor(
     }
 
     @GetMapping(value = ["/tasks/getAll"])
-    fun getAllUserTasks(@RequestParam userId: String): ResponseEntity<List<TaskEntity>> {
+    fun getAllUserTasks(@RequestParam userId: String): ResponseEntity<List<UserTasksEntity>> {
         return ResponseEntity(userService.getAllUserTasks(userId), HttpStatus.OK)
     }
 
