@@ -5,6 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "user_tasks")
+@IdClass(value = UserTasksId::class)
 data class UserTasksEntity(
 
     @Id
@@ -15,9 +16,9 @@ data class UserTasksEntity(
     @Column(name = "task_id", nullable = false)
     val taskId: Int = 0,
 
-    @Column(name = "status_id", nullable = false)
-    val statusId: Int = 0,
+    @Column(name = "status_id", nullable = true)
+    val statusId: Int? = 0,
 
     @Column(name = "report_id", nullable = true)
-    val reportId: Int = 0
+    val reportId: Int? = null
 ) : Serializable

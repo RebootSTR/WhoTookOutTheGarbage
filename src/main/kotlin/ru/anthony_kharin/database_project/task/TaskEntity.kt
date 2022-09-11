@@ -10,10 +10,13 @@ data class TaskEntity(
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskIdSeq")
     @Column(name = "id", nullable = false)
     val id: Int = 0,
+
     @Column(name = "title", nullable = false)
     val title: String = "",
+
     @Column(name = "description", nullable = false)
     val description: String = "",
+
     @Column(name = "cost", nullable = false)
     val cost: Int = 0
 )

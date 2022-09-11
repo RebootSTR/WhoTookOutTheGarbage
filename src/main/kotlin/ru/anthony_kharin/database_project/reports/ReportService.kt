@@ -3,28 +3,40 @@ package ru.anthony_kharin.database_project.reports
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.anthony_kharin.database_project.reports.dto.AddReportDto
-import ru.anthony_kharin.database_project.task.TaskRepository
+import ru.anthony_kharin.database_project.taskStatuses.Statuses
 import ru.anthony_kharin.database_project.user.UserRepository
+import ru.anthony_kharin.database_project.userTasks.UserTasksId
+import ru.anthony_kharin.database_project.userTasks.UserTasksRepository
 
 @Service
 class ReportService @Autowired constructor(
     private val reportRepository: ReportRepository,
     private val userRepository: UserRepository,
-    private val taskRepository: TaskRepository
+    private val userTasksRepository: UserTasksRepository
 ) {
-    fun addReport(report: AddReportDto): Int {
+    fun addReport(dto: AddReportDto): Int {
+        val user = userRepository.findById(dto.userId).get()
+        val task = user.tasks.first { it.id == dto.taskId }
+
         // add points to user
-        val task = taskRepository.findById(report.taskId).get()
-        val user = userRepository.findById(report.userId).get()
         val newUser = user.copy(
             score = user.score + task.cost
         )
+
+        // change status
+        val userTask = userTasksRepository.findById(UserTasksId(user.id, task.id)).get()
+        val newUserTask = userTask.copy(
+            statusId = Statuses.SUCCESS.id
+        )
+
+        // save user and userTask
+        userTasksRepository.save(newUserTask)
         userRepository.save(newUser)
 
         // saving report
         val r = ReportEntity(
-            text = report.text,
-            photo = "${report.photo1},${report.photo1}"
+            text = dto.text,
+            photo = "${dto.photo1},${dto.photo1}"
         )
         return reportRepository.save(r).id
     }

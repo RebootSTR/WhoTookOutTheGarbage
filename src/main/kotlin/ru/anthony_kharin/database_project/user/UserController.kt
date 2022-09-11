@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import ru.anthony_kharin.database_project.task.TaskEntity
 import ru.anthony_kharin.database_project.user.dto.AddUserDto
 
 @RestController
@@ -39,5 +40,19 @@ class UserController @Autowired constructor(
         } catch (t: Throwable) {
             ResponseEntity(HttpStatus.BAD_REQUEST)
         }
+    }
+
+    @GetMapping(value = ["/tasks/getAll"])
+    fun getAllUserTasks(@RequestParam userId: String): ResponseEntity<List<TaskEntity>> {
+        return ResponseEntity(userService.getAllUserTasks(userId), HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/tasks/new"])
+    @ResponseBody
+    fun addTask(@RequestParam userId: String, @RequestParam taskId: Int): ResponseEntity<UserEntity> {
+
+        val user = userService.addTask(userId, taskId)
+        return ResponseEntity(user, HttpStatus.OK)
+
     }
 }
