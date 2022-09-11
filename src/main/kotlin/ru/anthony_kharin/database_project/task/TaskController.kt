@@ -18,32 +18,20 @@ class TaskController @Autowired constructor(
 
     @PostMapping(value = ["/new"])
     fun addTask(@RequestBody dto: AddTaskDto): ResponseEntity<TaskEntity> {
-        return try {
-            val task = taskService.addTask(dto)
-            ResponseEntity(task, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val task = taskService.addTask(dto)
+        return ResponseEntity(task, HttpStatus.OK)
     }
 
     @GetMapping(value = ["/getAll"])
     fun getTasks(): ResponseEntity<List<TaskEntity>> {
-        return try {
-            val tasks = taskService.getAllTasks()
-            ResponseEntity(tasks, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val tasks = taskService.getAllTasks()
+        return ResponseEntity(tasks, HttpStatus.OK)
     }
 
     @GetMapping(value = ["/getById"])
     fun getTaskById(@RequestParam id: Int): ResponseEntity<TaskEntity> {
-        return try {
-            val task = taskService.getById(id)
-            ResponseEntity(task, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val task = taskService.getById(id)
+        return ResponseEntity(task, HttpStatus.OK)
     }
 
     @GetMapping(value = ["/status/getAll"])
@@ -54,17 +42,14 @@ class TaskController @Autowired constructor(
 
     @PostMapping(value = ["/statuses/new"])
     fun addStatus(@RequestBody dto: AddStatusDto): ResponseEntity<TaskStatusesEntity> {
-        return try {
-            val status = statusService.addStatus(dto)
-            ResponseEntity(status, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val status = statusService.addStatus(dto)
+        ResponseEntity(status, HttpStatus.OK)
+        return ResponseEntity(HttpStatus.BAD_REQUEST)
     }
 
     @PostMapping(value = ["/statuses/update"])
     fun addStatus(@RequestBody status: TaskStatusesEntity): ResponseEntity<TaskStatusesEntity> {
-        val status = statusService.update(status)
-        return ResponseEntity(status, HttpStatus.OK)
+        val statusUpdated = statusService.update(status)
+        return ResponseEntity(statusUpdated, HttpStatus.OK)
     }
 }

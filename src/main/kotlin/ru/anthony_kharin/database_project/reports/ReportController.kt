@@ -14,31 +14,22 @@ class ReportController @Autowired constructor(
 
     @PostMapping(value = ["/new"])
     fun addTask(@RequestBody addReportDto: AddReportDto): ResponseEntity<Int> {
-        return try {
-            val id = reportService.addReport(addReportDto)
-            ResponseEntity(id, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val id = reportService.addReport(addReportDto)
+        ResponseEntity(id, HttpStatus.OK)
+        return ResponseEntity(HttpStatus.BAD_REQUEST)
     }
 
     @GetMapping(value = ["/getAll"])
     fun getAll(): ResponseEntity<List<ReportEntity>> {
-        return try {
-            val reports = reportService.getAll()
-            ResponseEntity(reports, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val reports = reportService.getAll()
+        ResponseEntity(reports, HttpStatus.OK)
+        return ResponseEntity(HttpStatus.BAD_REQUEST)
     }
 
     @GetMapping(value = ["/getById"])
     fun updateTask(id: Int): ResponseEntity<ReportEntity> {
-        return try {
-            val report = reportService.getById(id)
-            ResponseEntity(report, HttpStatus.OK)
-        } catch (t: Throwable) {
-            ResponseEntity(HttpStatus.BAD_REQUEST)
-        }
+        val report = reportService.getById(id)
+        ResponseEntity(report, HttpStatus.OK)
+        return ResponseEntity(HttpStatus.BAD_REQUEST)
     }
 }

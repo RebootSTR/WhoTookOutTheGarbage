@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForEntity
+import java.lang.IllegalArgumentException
 
 @RestController
 @RequestMapping("/ping")
@@ -27,6 +28,12 @@ class PingController @Autowired constructor() {
         pingIsEnabled = true
         pingThread = createThread()
         pingThread?.start()
+        return ResponseEntity(HttpStatus.OK)
+    }
+
+    @GetMapping(value = ["/testError"])
+    fun testError(): ResponseEntity<HttpStatus> {
+        throw IllegalArgumentException("Why anton is here????")
         return ResponseEntity(HttpStatus.OK)
     }
 
