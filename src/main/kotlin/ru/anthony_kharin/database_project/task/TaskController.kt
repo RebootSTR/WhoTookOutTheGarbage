@@ -17,7 +17,7 @@ class TaskController @Autowired constructor(
 ) {
 
     @PostMapping(value = ["/new"])
-    fun addTask(dto: AddTaskDto): ResponseEntity<TaskEntity> {
+    fun addTask(@RequestBody dto: AddTaskDto): ResponseEntity<TaskEntity> {
         return try {
             val task = taskService.addTask(dto)
             ResponseEntity(task, HttpStatus.OK)
@@ -53,7 +53,7 @@ class TaskController @Autowired constructor(
     }
 
     @PostMapping(value = ["/statuses/new"])
-    fun addStatus(dto: AddStatusDto): ResponseEntity<TaskStatusesEntity> {
+    fun addStatus(@RequestBody dto: AddStatusDto): ResponseEntity<TaskStatusesEntity> {
         return try {
             val status = statusService.addStatus(dto)
             ResponseEntity(status, HttpStatus.OK)
@@ -63,7 +63,7 @@ class TaskController @Autowired constructor(
     }
 
     @PostMapping(value = ["/statuses/update"])
-    fun addStatus(status: TaskStatusesEntity): ResponseEntity<TaskStatusesEntity> {
+    fun addStatus(@RequestBody status: TaskStatusesEntity): ResponseEntity<TaskStatusesEntity> {
         val status = statusService.update(status)
         return ResponseEntity(status, HttpStatus.OK)
     }

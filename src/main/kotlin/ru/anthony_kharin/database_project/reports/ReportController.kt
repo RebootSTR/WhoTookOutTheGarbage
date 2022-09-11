@@ -13,7 +13,7 @@ class ReportController @Autowired constructor(
 ) {
 
     @PostMapping(value = ["/new"])
-    fun addTask(addReportDto: AddReportDto): ResponseEntity<Int> {
+    fun addTask(@RequestBody addReportDto: AddReportDto): ResponseEntity<Int> {
         return try {
             val id = reportService.addReport(addReportDto)
             ResponseEntity(id, HttpStatus.OK)

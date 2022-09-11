@@ -16,7 +16,7 @@ class UserController @Autowired constructor(
 ) {
 
     @PostMapping(value = ["/new"])
-    fun add(dto: AddUserDto): ResponseEntity<UserEntity> {
+    fun add(@RequestBody dto: AddUserDto): ResponseEntity<UserEntity> {
         return try {
             val user = userService.create(dto)
             ResponseEntity(user, HttpStatus.OK)
@@ -49,13 +49,13 @@ class UserController @Autowired constructor(
     }
 
     @PostMapping(value = ["/tasks/new"])
-    fun addTask(dto: TaskAndUserDTO): ResponseEntity<UserEntity> {
+    fun addTask(@RequestBody dto: TaskAndUserDTO): ResponseEntity<UserEntity> {
         val user = userService.addTask(dto)
         return ResponseEntity(user, HttpStatus.OK)
     }
 
     @PostMapping(value = ["/tasks/cancel"])
-    fun cancelTask(dto: TaskAndUserDTO): ResponseEntity<UserTasksEntity> {
+    fun cancelTask(@RequestBody dto: TaskAndUserDTO): ResponseEntity<UserTasksEntity> {
         val userTask = userService.cancelTask(dto)
         return ResponseEntity(userTask, HttpStatus.OK)
     }
