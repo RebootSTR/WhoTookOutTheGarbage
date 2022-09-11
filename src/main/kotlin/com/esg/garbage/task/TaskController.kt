@@ -43,8 +43,7 @@ class TaskController @Autowired constructor(
     @PostMapping(value = ["/statuses/new"])
     fun addStatus(@RequestBody dto: AddStatusDto): ResponseEntity<TaskStatusesEntity> {
         val status = statusService.addStatus(dto)
-        ResponseEntity(status, HttpStatus.OK)
-        return ResponseEntity(HttpStatus.BAD_REQUEST)
+        return ResponseEntity(status, HttpStatus.OK)
     }
 
     @PostMapping(value = ["/statuses/update"])
