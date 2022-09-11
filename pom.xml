@@ -8,7 +8,7 @@
         <version>2.3.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.anthony_Kharin</groupId>
+    <groupId>com.esg.garbage</groupId>
     <artifactId>database_project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>database_project</name>
