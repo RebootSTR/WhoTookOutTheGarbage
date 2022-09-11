@@ -5,8 +5,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import ru.anthony_kharin.database_project.task.TaskEntity
-import ru.anthony_kharin.database_project.user.dto.AddTaskToUserDto
+import ru.anthony_kharin.database_project.user.dto.TaskAndUserDTO
 import ru.anthony_kharin.database_project.user.dto.AddUserDto
+import ru.anthony_kharin.database_project.userTasks.UserTasksEntity
 
 @RestController
 @RequestMapping("/users")
@@ -48,8 +49,14 @@ class UserController @Autowired constructor(
     }
 
     @PostMapping(value = ["/tasks/new"])
-    fun addTask(dto: AddTaskToUserDto): ResponseEntity<UserEntity> {
+    fun addTask(dto: TaskAndUserDTO): ResponseEntity<UserEntity> {
         val user = userService.addTask(dto)
         return ResponseEntity(user, HttpStatus.OK)
+    }
+
+    @PostMapping(value = ["/tasks/cancel"])
+    fun cancelTask(dto: TaskAndUserDTO): ResponseEntity<UserTasksEntity> {
+        val userTask = userService.cancelTask(dto)
+        return ResponseEntity(userTask, HttpStatus.OK)
     }
 }
