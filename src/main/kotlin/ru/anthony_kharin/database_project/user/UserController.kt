@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import ru.anthony_kharin.database_project.task.TaskEntity
+import ru.anthony_kharin.database_project.user.dto.AddTaskToUserDto
 import ru.anthony_kharin.database_project.user.dto.AddUserDto
 
 @RestController
@@ -14,7 +15,6 @@ class UserController @Autowired constructor(
 ) {
 
     @PostMapping(value = ["/new"])
-    @ResponseBody
     fun add(dto: AddUserDto): ResponseEntity<UserEntity> {
         return try {
             val user = userService.create(dto)
@@ -48,11 +48,8 @@ class UserController @Autowired constructor(
     }
 
     @PostMapping(value = ["/tasks/new"])
-    @ResponseBody
-    fun addTask(@RequestParam userId: String, @RequestParam taskId: Int): ResponseEntity<UserEntity> {
-
-        val user = userService.addTask(userId, taskId)
+    fun addTask(dto: AddTaskToUserDto): ResponseEntity<UserEntity> {
+        val user = userService.addTask(dto)
         return ResponseEntity(user, HttpStatus.OK)
-
     }
 }

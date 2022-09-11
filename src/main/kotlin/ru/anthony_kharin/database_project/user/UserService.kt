@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import ru.anthony_kharin.database_project.task.TaskEntity
 import ru.anthony_kharin.database_project.task.TaskRepository
 import ru.anthony_kharin.database_project.taskStatuses.Statuses
+import ru.anthony_kharin.database_project.user.dto.AddTaskToUserDto
 import ru.anthony_kharin.database_project.user.dto.AddUserDto
 import ru.anthony_kharin.database_project.userTasks.UserTasksId
 import ru.anthony_kharin.database_project.userTasks.UserTasksRepository
@@ -27,9 +28,9 @@ class UserService @Autowired constructor(
     fun read(uid: String): UserEntity = userRepository.findById(uid).get()
 
     fun readAll(): List<UserEntity> = userRepository.findAll().toList()
-    fun addTask(userId: String, taskId: Int): UserEntity {
-        val user = userRepository.findById(userId).get()
-        val task = taskRepository.findById(taskId).get()
+    fun addTask(dto: AddTaskToUserDto): UserEntity {
+        val user = userRepository.findById(dto.userId).get()
+        val task = taskRepository.findById(dto.taskId).get()
 
         user.tasks.add(task)
         val userResult = userRepository.save(user)
